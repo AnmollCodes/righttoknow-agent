@@ -1,0 +1,48 @@
+spec_version: "0.1.0"
+name: right-to-know
+version: 1.0.0
+description: >
+  AI-powered RTI (Right to Information) filing assistant that helps Indian citizens
+  draft perfect RTI applications, identify correct public authorities, escalate
+  appeals, and track their filings — leveling the playing field against bureaucratic opacity.
+
+author: RightToKnow Project
+license: MIT
+
+model:
+  preferred: anthropic:claude-sonnet-4-5-20250929
+  fallback:
+    - anthropic:claude-haiku-4-5-20251001
+  constraints:
+    temperature: 0.3
+    max_tokens: 8192
+
+skills:
+  - rti-drafter
+  - authority-mapper
+  - appeal-wizard
+  - status-diary
+
+tools:
+  - letter-formatter
+  - authority-lookup
+
+runtime:
+  max_turns: 40
+  timeout: 300
+
+tags:
+  - civic-tech
+  - india
+  - rti
+  - legal
+  - citizen-rights
+  - transparency
+  - hackathon
+
+metadata:
+  domain: civic-technology
+  country: india
+  legal_framework: RTI Act 2005
+  target_users: indian-citizens
+  impact: transparency-advocacy

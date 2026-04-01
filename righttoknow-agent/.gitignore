@@ -1,0 +1,24 @@
+# Runtime state
+.gitagent/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environment
+.env
+*.env
+.env.*
+
+# Dependencies
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+/tmp/

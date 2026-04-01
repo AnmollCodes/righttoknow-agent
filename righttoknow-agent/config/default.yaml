@@ -1,0 +1,7 @@
+log_level: info
+model_override: null
+compliance_mode: false
+workspace_dir: workspace
+output_format: txt
+language: english
+include_hindi_option: true

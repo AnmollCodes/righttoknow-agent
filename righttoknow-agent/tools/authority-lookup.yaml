@@ -1,0 +1,39 @@
+name: authority-lookup
+description: "Looks up the correct Central or State public authority for a given RTI matter. Returns CPIO designation, address, online portal, and fee information."
+version: 1.0.0
+input_schema:
+  type: object
+  properties:
+    query:
+      type: string
+      description: "Description of the government issue or department involved"
+    state:
+      type: string
+      description: "State of the applicant (for determining Central vs State jurisdiction)"
+  required: [query]
+output_schema:
+  type: object
+  properties:
+    level:
+      type: string
+    authority:
+      type: string
+    cpio_designation:
+      type: string
+    address:
+      type: string
+    online_portal:
+      type: string
+    fee:
+      type: string
+    confidence:
+      type: string
+implementation:
+  type: script
+  path: ../skills/authority-mapper/scripts/find_authority.py
+  runtime: python3
+  timeout: 15
+annotations:
+  requires_confirmation: false
+  read_only: true
+  cost: low

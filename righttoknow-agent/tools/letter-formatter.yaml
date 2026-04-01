@@ -1,0 +1,57 @@
+name: letter-formatter
+description: "Formats and saves an RTI application or appeal letter to the workspace directory. Takes structured letter data and produces a properly formatted, ready-to-submit document."
+version: 1.0.0
+input_schema:
+  type: object
+  properties:
+    letter_type:
+      type: string
+      enum: [rti_application, first_appeal, second_appeal, complaint]
+      description: "Type of document to generate"
+    applicant_name:
+      type: string
+      description: "Full name of the RTI applicant"
+    applicant_address:
+      type: string
+      description: "Complete postal address"
+    authority_name:
+      type: string
+      description: "Name of the public authority"
+    authority_address:
+      type: string
+      description: "Complete address of the public authority"
+    subject:
+      type: string
+      description: "Subject line of the letter"
+    questions:
+      type: array
+      items:
+        type: string
+      description: "List of specific information requests"
+    reference_details:
+      type: array
+      items:
+        type: string
+      description: "Reference numbers, dates, and other relevant details"
+    output_filename:
+      type: string
+      description: "Output file name in workspace/ directory"
+  required: [applicant_name, authority_name, questions, output_filename]
+output_schema:
+  type: object
+  properties:
+    file_path:
+      type: string
+    word_count:
+      type: integer
+    status:
+      type: string
+implementation:
+  type: script
+  path: ../skills/rti-drafter/scripts/format_rti.py
+  runtime: python3
+  timeout: 30
+annotations:
+  requires_confirmation: false
+  read_only: false
+  cost: low

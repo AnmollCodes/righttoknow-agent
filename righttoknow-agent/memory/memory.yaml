@@ -1,0 +1,17 @@
+layers:
+  - name: working
+    path: memory/MEMORY.md
+    max_lines: 200
+    format: markdown
+  - name: archive
+    path: memory/archive/
+    format: yaml
+    rotation: monthly
+
+update_triggers:
+  - on_session_end
+  - on_explicit_save
+
+archive_policy:
+  max_entries: 500
+  compress_after: 90d

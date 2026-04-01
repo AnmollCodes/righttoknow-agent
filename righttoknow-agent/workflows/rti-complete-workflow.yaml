@@ -1,0 +1,52 @@
+name: rti-complete-workflow
+description: >
+  End-to-end RTI filing workflow. Takes a citizen problem description and
+  produces a complete ready-to-submit RTI application with filing instructions,
+  then records it in the status diary.
+version: 1.0.0
+
+inputs:
+  - name: user_problem
+    type: string
+    required: true
+  - name: applicant_name
+    type: string
+    required: true
+  - name: applicant_state
+    type: string
+    required: true
+  - name: is_bpl
+    type: boolean
+    default: false
+
+steps:
+  - id: understand
+    action: >
+      Analyze the problem: identify the core information need, government domain,
+      Central vs State jurisdiction, and any life/liberty urgency.
+    outputs: [core_information_need, urgency_level, jurisdiction]
+
+  - id: map_authority
+    skill: authority-mapper
+    depends_on: [understand]
+    outputs: [authority_name, cpio_designation, authority_address, fee, online_portal]
+
+  - id: draft_questions
+    action: >
+      Convert the complaint into specific legally-answerable RTI questions.
+      Maximum 8 questions asking for specific records or information.
+    depends_on: [understand, map_authority]
+    outputs: [questions_list, subject_line]
+
+  - id: generate_letter
+    skill: rti-drafter
+    depends_on: [map_authority, draft_questions]
+    outputs: [file_path, letter_text]
+
+  - id: filing_instructions
+    action: Provide complete step-by-step filing instructions with portal URL and fee details.
+    depends_on: [map_authority, generate_letter]
+
+  - id: record_filing
+    skill: status-diary
+    depends_on: [generate_letter, filing_instructions]

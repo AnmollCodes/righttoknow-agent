@@ -1,0 +1,25 @@
+entries:
+  - path: rti-act-key-sections.md
+    tags: [rti, law, sections, india, act-2005]
+    priority: high
+    always_load: true
+
+  - path: state-portals-and-fees.md
+    tags: [states, portals, fees, filing, india]
+    priority: high
+    always_load: true
+
+  - path: central-authorities.md
+    tags: [central, authorities, cpio, ministries, departments]
+    priority: high
+    always_load: true
+
+  - path: common-rejection-reasons.md
+    tags: [rejection, appeal, counter, strategy, section-8]
+    priority: medium
+    always_load: false
+
+  - path: effective-rti-strategies.md
+    tags: [strategy, tips, drafting, success, winning]
+    priority: medium
+    always_load: false
